@@ -40,13 +40,7 @@
     return self;
 }
 
-/*
-- (id)initWithFrame:(CGRect)frame prevPage:(PSPage *)prevPage nextPage:(PSPage *)nextPage
-{
-    
-    return self;
-}
- */
+
 -(void)setNextPageCenter:(CGPoint)translationPoint
 {
     self.nextPage.center = CGPointMake(self.nextPage.center.x + translationPoint.x, self.nextPage.center.y);
@@ -106,8 +100,6 @@
     }
     
     CGPoint translatedPoint = [draggingGesture translationInView:self.superview];
-//    CGFloat changeMarging = 0.0f;
-//    CGPoint parentViewCenter;
     
     if (draggingGesture.state == UIGestureRecognizerStateChanged) {
         [self setCenter:CGPointMake(self.center.x + translatedPoint.x, self.center.y)];
@@ -115,14 +107,7 @@
         [self setNextPageCenter:translatedPoint];
         [draggingGesture setTranslation:CGPointZero inView:[self superview]];
     }
-    
-    
-//    if ((self.center.x  >= parentViewCenter.x + changeMarging) || (self.center.x  <= parentViewCenter.x + changeMarging))
-//    {
-//        [self originalSize:PSRecursiveDirectionNone];
-//        [self.nextPage decreaseSize:PSRecursiveDirectionNext];
-//        [self.prevPage decreaseSize:PSRecursiveDirectionPrev];
-//    } 
+
     
     if (draggingGesture.state == UIGestureRecognizerStateEnded)
     {
