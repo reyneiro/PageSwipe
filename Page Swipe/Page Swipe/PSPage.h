@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DirectionPanGestureRecognizer.h"
 
 
 typedef enum {
@@ -16,7 +17,7 @@ typedef enum {
 }PSRecursiveDirection;
 
 
-@interface PSPage : UIView
+@interface PSPage : UIView <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) PSPage *nextPage;
 @property (strong, nonatomic) PSPage *prevPage;

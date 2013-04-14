@@ -22,8 +22,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.page = [[PSPage alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    self.page = [[PSPage alloc] initWithFrame:self.view.frame];
+//    self.page = [[PSPage alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.page = [[PSPage alloc] initWithFrame:CGRectMake(20, 120, 200, 200)];
     self.page.center = self.view.center;
     [self.view addSubview:self.page];
     [self.page setBackgroundColor:[UIColor redColor]];

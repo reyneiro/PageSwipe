@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F1D8C729171A486F00472DD2 /* DirectionPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8C728171A486F00472DD2 /* DirectionPanGestureRecognizer.m */; };
 		F1FDD1061719A386007DD3E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FDD1051719A386007DD3E1 /* UIKit.framework */; };
 		F1FDD1081719A386007DD3E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FDD1071719A386007DD3E1 /* Foundation.framework */; };
 		F1FDD10A1719A386007DD3E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FDD1091719A386007DD3E1 /* CoreGraphics.framework */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F1D8C727171A486F00472DD2 /* DirectionPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectionPanGestureRecognizer.h; path = Classes/DirectionPanGestureRecognizer.h; sourceTree = "<group>"; };
+		F1D8C728171A486F00472DD2 /* DirectionPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectionPanGestureRecognizer.m; path = Classes/DirectionPanGestureRecognizer.m; sourceTree = "<group>"; };
 		F1FDD1021719A386007DD3E1 /* Page Swipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Page Swipe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FDD1051719A386007DD3E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F1FDD1071719A386007DD3E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -117,6 +120,8 @@
 		F1FDD1281719A3AE007DD3E1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F1D8C727171A486F00472DD2 /* DirectionPanGestureRecognizer.h */,
+				F1D8C728171A486F00472DD2 /* DirectionPanGestureRecognizer.m */,
 				F1FDD1291719A3F2007DD3E1 /* PSPageBook.h */,
 				F1FDD12A1719A3F2007DD3E1 /* PSPageBook.m */,
 				F1FDD12C1719A4AD007DD3E1 /* PSPage.h */,
@@ -196,6 +201,7 @@
 				F1FDD1221719A386007DD3E1 /* ViewController.m in Sources */,
 				F1FDD12B1719A3F2007DD3E1 /* PSPageBook.m in Sources */,
 				F1FDD12E1719A4AD007DD3E1 /* PSPage.m in Sources */,
+				F1D8C729171A486F00472DD2 /* DirectionPanGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
