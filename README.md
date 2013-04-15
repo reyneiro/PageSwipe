@@ -1,7 +1,7 @@
-PageSwipe
+##PageSwipe
 =========
 
-License
+##License
 =========
 Copyright (c) 2013 Reyneiro Hernandez
 

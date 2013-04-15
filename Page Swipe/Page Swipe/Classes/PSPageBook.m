@@ -75,7 +75,7 @@
         page.alpha = 0;
         [self addSubview:page];
         
-        CGPoint center = self.center;
+        CGPoint center =  self.pagesArray.count > 0 ? ((PSPage *)self.pagesArray.lastObject).center : self.center;
         center.y -= page.frame.size.height/2;
         page.center = center;
         

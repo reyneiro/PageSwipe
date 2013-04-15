@@ -1,8 +1,9 @@
 //
-//  ViewController.m
+//  FullScreenPageViewController.m
 //  Page Swipe
 //
-//Copyright (c) 2013 Reyneiro Hernandez
+//  Created by Reyneiro Hernandez on 4/14/13.
+//  Copyright (c) 2013 Copyright (c) 2013 Reyneiro Hernandez
 //
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,18 +21,18 @@
 //AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//THE SOFTWARE.
+//THE SOFTWARE. All rights reserved.
+//
 
-#import "ViewController.h"
+#import "FullScreenPageViewController.h"
 #import "PSPageBook.h"
 
-@interface ViewController ()
-
+@interface FullScreenPageViewController ()
 @property (strong, nonatomic) PSPageBook *pageBook;
 
 @end
 
-@implementation ViewController
+@implementation FullScreenPageViewController
 
 - (void)viewDidLoad
 {
@@ -48,11 +49,11 @@
         [self.pageBook setBackgroundColor:[UIColor whiteColor]];
         
         
-        for (int i = 0; i < 3; i++) {
-            PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width/2, self.pageBook.frame.size.height/2)];
-            [page setBackgroundColor:[UIColor purpleColor]];
-            [self.pageBook addPage:page];
-        }
+//        for (int i = 0; i < 10; i++) {
+//            PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width, self.pageBook.frame.size.height)];
+//            [page setBackgroundColor:[UIColor redColor]];
+//            [self.pageBook addPage:page];
+//        }
         
         [self.view addSubview:self.pageBook];
         [self.view sendSubviewToBack:self.pageBook];
@@ -67,7 +68,7 @@
 
 - (IBAction)addNewPage:(id)sender {
     
-    PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width/2, self.pageBook.frame.size.height/2)];
+    PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width, self.pageBook.frame.size.height)];
     
     if (self.pageBook.pages.count % 2 == 0) {
         [page setBackgroundColor:[UIColor greenColor]];
@@ -80,4 +81,5 @@
     [self.pageBook addPage:page];
     
 }
+
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F1D8C729171A486F00472DD2 /* DirectionPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8C728171A486F00472DD2 /* DirectionPanGestureRecognizer.m */; };
+		F1D8C730171BA20A00472DD2 /* FullScreenPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8C72F171BA20A00472DD2 /* FullScreenPageViewController.m */; };
+		F1D8C733171BA22D00472DD2 /* PSPage.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8C732171BA22D00472DD2 /* PSPage.m */; };
 		F1FDD1061719A386007DD3E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FDD1051719A386007DD3E1 /* UIKit.framework */; };
 		F1FDD1081719A386007DD3E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FDD1071719A386007DD3E1 /* Foundation.framework */; };
 		F1FDD10A1719A386007DD3E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FDD1091719A386007DD3E1 /* CoreGraphics.framework */; };
@@ -20,12 +22,15 @@
 		F1FDD11F1719A386007DD3E1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1FDD11D1719A386007DD3E1 /* MainStoryboard.storyboard */; };
 		F1FDD1221719A386007DD3E1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FDD1211719A386007DD3E1 /* ViewController.m */; };
 		F1FDD12B1719A3F2007DD3E1 /* PSPageBook.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FDD12A1719A3F2007DD3E1 /* PSPageBook.m */; };
-		F1FDD12E1719A4AD007DD3E1 /* PSPage.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FDD12D1719A4AD007DD3E1 /* PSPage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F1D8C727171A486F00472DD2 /* DirectionPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectionPanGestureRecognizer.h; path = Classes/DirectionPanGestureRecognizer.h; sourceTree = "<group>"; };
 		F1D8C728171A486F00472DD2 /* DirectionPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectionPanGestureRecognizer.m; path = Classes/DirectionPanGestureRecognizer.m; sourceTree = "<group>"; };
+		F1D8C72E171BA20A00472DD2 /* FullScreenPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenPageViewController.h; sourceTree = "<group>"; };
+		F1D8C72F171BA20A00472DD2 /* FullScreenPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenPageViewController.m; sourceTree = "<group>"; };
+		F1D8C731171BA22D00472DD2 /* PSPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSPage.h; path = Classes/PSPage.h; sourceTree = "<group>"; };
+		F1D8C732171BA22D00472DD2 /* PSPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSPage.m; path = Classes/PSPage.m; sourceTree = "<group>"; };
 		F1FDD1021719A386007DD3E1 /* Page Swipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Page Swipe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FDD1051719A386007DD3E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F1FDD1071719A386007DD3E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -44,8 +49,6 @@
 		F1FDD1211719A386007DD3E1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F1FDD1291719A3F2007DD3E1 /* PSPageBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSPageBook.h; path = Classes/PSPageBook.h; sourceTree = "<group>"; };
 		F1FDD12A1719A3F2007DD3E1 /* PSPageBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSPageBook.m; path = Classes/PSPageBook.m; sourceTree = "<group>"; };
-		F1FDD12C1719A4AD007DD3E1 /* PSPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPage.h; sourceTree = "<group>"; };
-		F1FDD12D1719A4AD007DD3E1 /* PSPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F1D8C72A171B9EAD00472DD2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F1D8C72E171BA20A00472DD2 /* FullScreenPageViewController.h */,
+				F1D8C72F171BA20A00472DD2 /* FullScreenPageViewController.m */,
+				F1FDD1201719A386007DD3E1 /* ViewController.h */,
+				F1FDD1211719A386007DD3E1 /* ViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		F1FDD0F91719A386007DD3E1 = {
 			isa = PBXGroup;
 			children = (
@@ -92,10 +106,9 @@
 		F1FDD10B1719A386007DD3E1 /* Page Swipe */ = {
 			isa = PBXGroup;
 			children = (
+				F1D8C72A171B9EAD00472DD2 /* ViewControllers */,
 				F1FDD1281719A3AE007DD3E1 /* Classes */,
 				F1FDD11D1719A386007DD3E1 /* MainStoryboard.storyboard */,
-				F1FDD1201719A386007DD3E1 /* ViewController.h */,
-				F1FDD1211719A386007DD3E1 /* ViewController.m */,
 				F1FDD10C1719A386007DD3E1 /* Supporting Files */,
 			);
 			path = "Page Swipe";
@@ -124,8 +137,8 @@
 				F1D8C728171A486F00472DD2 /* DirectionPanGestureRecognizer.m */,
 				F1FDD1291719A3F2007DD3E1 /* PSPageBook.h */,
 				F1FDD12A1719A3F2007DD3E1 /* PSPageBook.m */,
-				F1FDD12C1719A4AD007DD3E1 /* PSPage.h */,
-				F1FDD12D1719A4AD007DD3E1 /* PSPage.m */,
+				F1D8C731171BA22D00472DD2 /* PSPage.h */,
+				F1D8C732171BA22D00472DD2 /* PSPage.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -200,8 +213,9 @@
 				F1FDD1161719A386007DD3E1 /* AppDelegate.m in Sources */,
 				F1FDD1221719A386007DD3E1 /* ViewController.m in Sources */,
 				F1FDD12B1719A3F2007DD3E1 /* PSPageBook.m in Sources */,
-				F1FDD12E1719A4AD007DD3E1 /* PSPage.m in Sources */,
 				F1D8C729171A486F00472DD2 /* DirectionPanGestureRecognizer.m in Sources */,
+				F1D8C730171BA20A00472DD2 /* FullScreenPageViewController.m in Sources */,
+				F1D8C733171BA22D00472DD2 /* PSPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
