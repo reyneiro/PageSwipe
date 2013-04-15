@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "PSPage.h"
+#import "PSPageBook.h"
 
 @interface ViewController ()
 
-@property (strong, nonatomic) PSPage *page;
+@property (strong, nonatomic) PSPageBook *pageBook;
 
 @end
 
@@ -21,30 +21,26 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-//    self.page = [[PSPage alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.page = [[PSPage alloc] initWithFrame:CGRectMake(20, 120, 200, 200)];
-    self.page.center = self.view.center;
-    [self.view addSubview:self.page];
-    [self.page setBackgroundColor:[UIColor redColor]];
-    
-//    self.page.prevPage = [[PSPage alloc] initWithFrame:CGRectMake(20, 120, 200, 200)];
-    self.page.prevPage = [[PSPage alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:self.page.prevPage];
-    [self.page.prevPage setBackgroundColor:[UIColor greenColor]];
-    self.page.prevPage.nextPage = self.page;
-    
-//    self.page.nextPage = [[PSPage alloc] initWithFrame:CGRectMake(20, 120, 200, 200)];
-    self.page.nextPage = [[PSPage alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:self.page.nextPage];
-    [self.page.nextPage setBackgroundColor:[UIColor blueColor]];
-    self.page.nextPage.prevPage = self.page;
-    
-//    self.page.nextPage.nextPage = [[PSPage alloc] initWithFrame:CGRectMake(20, 120, 80, 80)];
-    self.page.nextPage.nextPage = [[PSPage alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:self.page.nextPage.nextPage];
-    [self.page.nextPage.nextPage setBackgroundColor:[UIColor yellowColor]];
-    self.page.nextPage.nextPage.prevPage = self.page.nextPage;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    if(!self.pageBook)
+    {
+        self.pageBook = [[PSPageBook alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        self.pageBook.center = self.view.center;
+        [self.pageBook setBackgroundColor:[UIColor whiteColor]];
+        
+        
+        for (int i = 0; i < 10; i++) {
+            PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width/2, self.pageBook.frame.size.height/2)];
+            [page setBackgroundColor:[UIColor redColor]];
+            [self.pageBook addPage:page];
+        }
+        
+        [self.view addSubview:self.pageBook];
+        [self.view sendSubviewToBack:self.pageBook];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,4 +49,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)addNewPage:(id)sender {
+    
+    PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width/2, self.pageBook.frame.size.height/2)];
+    [page setBackgroundColor:[UIColor redColor]];
+    [self.pageBook addPage:page];
+    
+}
 @end

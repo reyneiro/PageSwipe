@@ -10,4 +10,5 @@
 
 @interface ViewController : UIViewController
 
+- (IBAction)addNewPage:(id)sender;
 @end

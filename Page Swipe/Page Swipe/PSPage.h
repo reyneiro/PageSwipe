@@ -16,9 +16,18 @@ typedef enum {
     PSRecursiveDirectionPrev = 2
 }PSRecursiveDirection;
 
+@class PSPage;
+@protocol PSPageDelegate <NSObject>
+
+@property (weak, nonatomic) PSPage *currentPage; //current page been showed (main page at a given moment)
+
+-(void)pageWasRemoved:(PSPage *)page;
+
+@end
 
 @interface PSPage : UIView <UIGestureRecognizerDelegate>
 
+@property (assign, nonatomic) id <PSPageDelegate> delegate;
 @property (strong, nonatomic) PSPage *nextPage;
 @property (strong, nonatomic) PSPage *prevPage;
 

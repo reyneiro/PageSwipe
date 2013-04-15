@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PSPage.h"
 
-@interface PSPageBook : NSObject
+@interface PSPageBook : UIView <PSPageDelegate>
 
-@property (strong, nonatomic) NSMutableArray *pages; //array of all the pages
+@property (strong, nonatomic, readonly) NSArray *pages; //array of all the pages
+
+-(void)addPage:(PSPage *)page;
 
 @end

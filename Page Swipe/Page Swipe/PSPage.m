@@ -94,6 +94,8 @@
         return;
     }
     
+    nextPage.prevPage = self;
+    
     CGRect frame = self.frame;
     frame.origin.x = self.frame.origin.x + self.frame.size.width + 5.0f;
     nextPage.frame = frame;
@@ -110,6 +112,8 @@
     if ([self isEqual:prevPage.nextPage]) {
         return;
     }
+    
+    prevPage.nextPage = self;
     
     CGRect frame = self.frame;
     frame.origin.x = self.frame.origin.x - self.frame.size.width - 5.0f;
@@ -208,7 +212,7 @@
     }
 
     
-    if (draggingGesture.state == UIGestureRecognizerStateEnded)
+    if (draggingGesture.state == UIGestureRecognizerStateEnded || draggingGesture.state == UIGestureRecognizerStateCancelled)
     {
                 
         kAnimationsSpeed = .3;
@@ -249,39 +253,53 @@
     if (draggingGesture.state == UIGestureRecognizerStateChanged) {
         
         [self setCenter:CGPointMake(self.center.x, self.center.y + translatedPoint.y)];
-        CGFloat num = MAX(self.center.y - self.superview.center.y, self.superview.center.y - self.center.y);
+        CGFloat num = MAX(self.center.y - [self centerOnSuperView].y, [self centerOnSuperView].y - self.center.y);
         self.alpha = 60.0f/num;
 //        [self setPrevPageCenter:translatedPoint];
 //        [self setNextPageCenter:translatedPoint];
+        int directionIndicator = 0;
+        
         if (self.prevPage) {
-            [self setPrevPageCenter:CGPointMake(MAX(-1 * translatedPoint.y, translatedPoint.y), translatedPoint.y)];
+//            [self setPrevPageCenter:CGPointMake(MAX(-1 * translatedPoint.y, translatedPoint.y), translatedPoint.y)];
+            directionIndicator = [draggingGesture velocityInView:self].y < 0 ?  1 :  -1;
+            [self setPrevPageCenter:CGPointMake(-1 *directionIndicator * translatedPoint.y, translatedPoint.y)];
         }
         else
         {
-            [self setNextPageCenter:CGPointMake(translatedPoint.y, translatedPoint.y)];
+//            [self setNextPageCenter:CGPointMake(MIN(-1 * translatedPoint.y, translatedPoint.y), translatedPoint.y)];
+            directionIndicator = [draggingGesture velocityInView:self].y >= 0 ?  -1 :  1;
+            [self setNextPageCenter:CGPointMake(directionIndicator * translatedPoint.y, translatedPoint.y)];
         }
         
         [draggingGesture setTranslation:CGPointZero inView:[self superview]];
     }
     
     
-    if (draggingGesture.state == UIGestureRecognizerStateEnded)
+    if (draggingGesture.state == UIGestureRecognizerStateEnded || draggingGesture.state == UIGestureRecognizerStateCancelled)
     {
         
         kAnimationsSpeed = .3;
         [self centerView:^(BOOL finished) {            
-
+            
+            
             if (self.shouldIncrease) {
                 [self originalSize:PSRecursiveDirectionNext];
                 [self.prevPage originalSize:PSRecursiveDirectionPrev];
             }
             
             if (self.shouldRemovePage) {
+                PSPage *tempPage = self.prevPage ? self.prevPage : self.nextPage;
                 [self removePage];
-                [self centerView:nil];
+                [tempPage alignCentersFromPoint:[tempPage centerOnSuperView]];
+                self.isMovingOnY = NO;
             }
+            else
+            {
+                [self alignCentersFromPoint:[self centerOnSuperView]];
+                self.isMovingOnY = NO;
+            }
+         
             
-            self.isMovingOnY = NO;
         }];
         
     }
@@ -378,9 +396,9 @@
 */
 -(void)centerView:(void (^)(BOOL finished)) completion
 {
-    CGFloat distance = [self distanceFrom:self.center to:self.superview.center];
-    CGFloat distanceNext = [self distanceFrom:self.nextPage.center to:self.superview.center];
-    CGFloat distancePrev = [self distanceFrom:self.prevPage.center to:self.superview.center];
+    CGFloat distance = [self distanceFrom:self.center to:[self centerOnSuperView]];
+    CGFloat distanceNext = [self distanceFrom:self.nextPage.center to:[self centerOnSuperView]];
+    CGFloat distancePrev = [self distanceFrom:self.prevPage.center to:[self centerOnSuperView]];
     
     [UIView animateWithDuration:kAnimationsSpeed animations:^{
         if (distance <= distanceNext)
@@ -388,22 +406,26 @@
             if (distance <= distancePrev)
             {
                 [self alignCentersFromPage:self];
+                [self.delegate setCurrentPage:self];
                 self.alpha = 1;
             }
             else
             {
                 [self.prevPage alignCentersFromPage:self.prevPage];
+                [self.delegate setCurrentPage:self.prevPage];
                 [self setShouldRemovePage:YES];
             }
         }
         else if(distanceNext <= distancePrev)
         {
             [self.nextPage alignCentersFromPage:self.nextPage];
+            [self.delegate setCurrentPage:self.nextPage];
             [self setShouldRemovePage:YES];
         }
         else
         {
             [self.prevPage alignCentersFromPage:self.prevPage];
+            [self.delegate setCurrentPage:self.prevPage];
             [self setShouldRemovePage:YES];
         }
     } completion:^(BOOL finished) {
@@ -423,11 +445,20 @@
 -(void)removePage
 {
     if (self.isMovingOnY) {
+        
+        if ([self.delegate respondsToSelector:@selector(pageWasRemoved:)]) {
+            [self.delegate pageWasRemoved:self];
+        }
+        
         self.prevPage.nextPage = self.nextPage;
         self.nextPage.prevPage = self.prevPage;
         self.prevPage = nil;
         self.nextPage = nil;
-        [self removeFromSuperview];
+        [UIView animateWithDuration:kAnimationsSpeed animations:^{
+            self.alpha = 0;
+            [self removeFromSuperview];
+        }];
+        
     }
 }
 
@@ -436,15 +467,35 @@
     CGPoint originalCenter = page.center;
     
     CGPoint tranlationPoint = [page translationPointFrom:originalCenter];
-    [page setCenter:page.superview.center];
+    [page setCenter:[page centerOnSuperView]];
     [page setNextPageCenter:tranlationPoint];
     [page setPrevPageCenter:tranlationPoint];
 }
 
+-(void)alignCentersFromPoint:(CGPoint)point
+{
+    [UIView animateWithDuration:kAnimationsSpeed animations:^{
+        [self alignNextPageCentersFromPoint:point];
+        [self alignPrevPageCentersFromPoint:point];
+    }];
+}
+
+-(void)alignNextPageCentersFromPoint:(CGPoint)point
+{
+    self.nextPage.center = CGPointMake(self.center.x + self.frame.size.width + 5.0, self.center.y);
+    [self.nextPage alignNextPageCentersFromPoint:self.nextPage.center];
+}
+
+-(void)alignPrevPageCentersFromPoint:(CGPoint)point
+{
+    self.prevPage.center = CGPointMake(self.center.x - self.frame.size.width - 5.0, self.center.y);
+    [self.prevPage alignNextPageCentersFromPoint:self.prevPage.center];
+}
+
 -(CGPoint)translationPointFrom:(CGPoint )originalCenter
 {    
-    CGFloat xDist = (self.superview.center.x - originalCenter.x);
-    CGFloat yDist = (self.superview.center.y - originalCenter.y);
+    CGFloat xDist = ([self centerOnSuperView].x - originalCenter.x);
+    CGFloat yDist = ([self centerOnSuperView].y - originalCenter.y);
     CGPoint tranlationPoint = CGPointMake(xDist, yDist);
     
     return tranlationPoint;
@@ -457,5 +508,13 @@
     return sqrt((xDist * xDist) + (yDist * yDist));
 }
 
+-(CGPoint)centerOnSuperView
+{
+    CGFloat width = self.superview.frame.size.width/2.0f;
+    CGFloat height = self.superview.frame.size.height/2.0f;
+    CGPoint center = CGPointMake(width, height);
+    
+    return center;
+}
 
 @end
