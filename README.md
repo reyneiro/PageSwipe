@@ -6,7 +6,7 @@
 This is a work in progress and have a few bugs that need to be fixed.
 
 Bugs:
-	There is a bug when removing one of the pages(swiping up or down) if the swipe change to oposite direction.
+	There is a bug when removing one of the pages(swiping up or down) if the swipe change to the oposite direction.
 
 ##License
 =========
