@@ -7,6 +7,6 @@ Pod::Spec.new do |s|
   s.author       = { "Reyneiro Hernandez" => "reyneiro1987@gmail.com" }
   s.source       = { :git => "https://github.com/reyneiro/PageSwipe.git" }
   s.platform     = :ios, '5.0'
-  s.source_files = 'Page Swipe/Classes/*.{h,m}'
+  s.source_files = 'Page Swipe/Page Swipe/Classes/*.{h,m}'
   s.requires_arc = true
 end
