@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F182E9FB175EF78F00481321 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F182E9FA175EF78F00481321 /* QuartzCore.framework */; };
 		F1D8C729171A486F00472DD2 /* DirectionPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8C728171A486F00472DD2 /* DirectionPanGestureRecognizer.m */; };
 		F1D8C730171BA20A00472DD2 /* FullScreenPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8C72F171BA20A00472DD2 /* FullScreenPageViewController.m */; };
 		F1D8C733171BA22D00472DD2 /* PSPage.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8C732171BA22D00472DD2 /* PSPage.m */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F182E9FA175EF78F00481321 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F1D8C727171A486F00472DD2 /* DirectionPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectionPanGestureRecognizer.h; path = Classes/DirectionPanGestureRecognizer.h; sourceTree = "<group>"; };
 		F1D8C728171A486F00472DD2 /* DirectionPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectionPanGestureRecognizer.m; path = Classes/DirectionPanGestureRecognizer.m; sourceTree = "<group>"; };
 		F1D8C72E171BA20A00472DD2 /* FullScreenPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenPageViewController.h; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F182E9FB175EF78F00481321 /* QuartzCore.framework in Frameworks */,
 				F1FDD1061719A386007DD3E1 /* UIKit.framework in Frameworks */,
 				F1FDD1081719A386007DD3E1 /* Foundation.framework in Frameworks */,
 				F1FDD10A1719A386007DD3E1 /* CoreGraphics.framework in Frameworks */,
@@ -96,6 +99,7 @@
 		F1FDD1041719A386007DD3E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F182E9FA175EF78F00481321 /* QuartzCore.framework */,
 				F1FDD1051719A386007DD3E1 /* UIKit.framework */,
 				F1FDD1071719A386007DD3E1 /* Foundation.framework */,
 				F1FDD1091719A386007DD3E1 /* CoreGraphics.framework */,

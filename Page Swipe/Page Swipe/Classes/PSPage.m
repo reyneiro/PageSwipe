@@ -23,6 +23,7 @@
 //THE SOFTWARE.
 
 #import "PSPage.h"
+#import <QuartzCore/QuartzCore.h>
 #define distanceBetweenPages 50.0f 
 
 @interface PSPage ()
