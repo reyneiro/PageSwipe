@@ -28,6 +28,7 @@
 @interface PSPageBook : UIView <PSPageDelegate>
 
 @property (strong, nonatomic, readonly) NSArray *pages; //array of all the pages
+@property (nonatomic) BOOL allowRemovePages;
 
 -(void)addPage:(PSPage *)page;
 

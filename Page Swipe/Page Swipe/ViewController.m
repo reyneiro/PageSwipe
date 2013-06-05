@@ -49,7 +49,7 @@
         
         
         for (int i = 0; i < 3; i++) {
-            PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width/2, self.pageBook.frame.size.height/2)];
+            PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width/1.2, self.pageBook.frame.size.height/1.2)];
             [page setBackgroundColor:[UIColor purpleColor]];
             [self.pageBook addPage:page];
         }
@@ -67,7 +67,7 @@
 
 - (IBAction)addNewPage:(id)sender {
     
-    PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width/2, self.pageBook.frame.size.height/2)];
+    PSPage *page = [[PSPage alloc] initWithFrame:CGRectMake(0, 0, self.pageBook.frame.size.width/1.2, self.pageBook.frame.size.height/1.2)];
     
     if (self.pageBook.pages.count % 2 == 0) {
         [page setBackgroundColor:[UIColor greenColor]];

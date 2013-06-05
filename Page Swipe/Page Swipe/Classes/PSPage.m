@@ -23,7 +23,7 @@
 //THE SOFTWARE.
 
 #import "PSPage.h"
- 
+#define distanceBetweenPages 50.0f 
 
 @interface PSPage ()
 {
@@ -113,7 +113,7 @@
     nextPage.prevPage = self;
     
     CGRect frame = self.frame;
-    frame.origin.x = self.frame.origin.x + self.frame.size.width + 5.0f;
+    frame.origin.x = self.frame.origin.x + self.frame.size.width + distanceBetweenPages;
     nextPage.frame = frame;
 }
 
@@ -132,7 +132,7 @@
     prevPage.nextPage = self;
     
     CGRect frame = self.frame;
-    frame.origin.x = self.frame.origin.x - self.frame.size.width - 5.0f;
+    frame.origin.x = self.frame.origin.x - self.frame.size.width - distanceBetweenPages;
     prevPage.frame = frame;
     
     
@@ -184,6 +184,10 @@
 */
 -(void)pinchView:(UIPinchGestureRecognizer *)pinchGesture
 {
+    if (!self.canBeResized) {
+        return;
+    }
+    
     if (pinchGesture.scale < 1)
     {
         kAnimationsSpeed = .2;
@@ -225,13 +229,36 @@
         [self setPrevPageCenter:translatedPoint];
         [self setNextPageCenter:translatedPoint];
         [draggingGesture setTranslation:CGPointZero inView:[self superview]];
+        
+        //Use only if do not want to scroll 100% horizontal
+        //Know the direction
+        CGPoint velocity = [draggingGesture velocityInView:self];
+        
+        if(self.center.x < self.superview.center.x)
+        {
+            [self rotateInZPrev: velocity.x < 0 || self.center.x < self.superview.center.x ? self : self.prevPage];
+            [self rotateInZNext: velocity.x < 0 || self.center.x < self.superview.center.x ? self.nextPage : self];
+        }
+        else
+        {
+            [self rotateInZPrev: velocity.x < 0 && self.center.x < self.superview.center.x ? self : self.prevPage];
+            [self rotateInZNext: velocity.x < 0 && self.center.x < self.superview.center.x ? self.nextPage : self];
+        }
+        //End
     }
-
+    
     
     if (draggingGesture.state == UIGestureRecognizerStateEnded || draggingGesture.state == UIGestureRecognizerStateCancelled)
     {
                 
         kAnimationsSpeed = .3;
+        
+        if(!self.isHorizontalOnly)
+        {
+            [self originalSize:PSRecursiveDirectionNext];
+            [self.prevPage originalSize:PSRecursiveDirectionPrev];
+        }
+        
         [self centerView:^(BOOL finished) {
             
             if (self.shouldIncrease) {
@@ -253,6 +280,9 @@
 */
 -(void)dragViewVertically:(UIPanGestureRecognizer *) draggingGesture
 {
+    if (!self.canBeRemoved) {
+        return;
+    }
     
     if (draggingGesture.state == UIGestureRecognizerStateBegan) {
         // set original center so we know where to put it back if we have to.
@@ -329,6 +359,10 @@
  */
 -(void)decreaseSize:(PSRecursiveDirection) recursiveDirection
 {
+    if (!self.canBeResized) {
+        return;
+    }
+    
     [UIView animateWithDuration: kAnimationsSpeed
                           delay: 0
                         options: (UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction)
@@ -533,4 +567,34 @@
     return center;
 }
 
+-(void)rotateInZPrev:(PSPage *)page
+{
+    CGFloat distanceFromCenter = [page distanceFrom:[page centerOnSuperView] to:page.center];
+    CGFloat zAngle = -1 * 0.2f * distanceFromCenter/(page.superview.frame.size.width/3.0f);
+    CGFloat angle = 15.0f * distanceFromCenter/(page.superview.frame.size.width/2.5f);
+    //MAX(-1 * fmodl(distanceFromCenter, 0.2f), zAngle);
+    
+    [UIView animateWithDuration:.5 animations:^{
+        CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
+        rotationAndPerspectiveTransform.m34 = 1.0 / -500;
+        rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, angle * M_PI / 180.0f, 0.0f, 1.0f, zAngle);
+        page.layer.transform = rotationAndPerspectiveTransform;
+        page.center = CGPointMake(page.center.x, page.superview.center.y + distanceFromCenter/6.0f);
+    }];
+}
+
+-(void)rotateInZNext:(PSPage *)page
+{
+    CGFloat distanceFromCenter = [page distanceFrom:[page centerOnSuperView] to:page.center];
+    CGFloat zAngle = -1 * (0.2f * distanceFromCenter/(page.superview.frame.size.width/3.0f));
+    CGFloat angle = -1 * (15.0f * distanceFromCenter/(page.superview.frame.size.width/2.5f));
+    
+    [UIView animateWithDuration:.5 animations:^{
+        CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
+        rotationAndPerspectiveTransform.m34 = 1.0 / -500;
+        rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, angle * M_PI / 180.0f, 0.0f, 1.0f, zAngle);
+        page.layer.transform = rotationAndPerspectiveTransform;
+        page.center = CGPointMake(page.center.x, page.superview.center.y + distanceFromCenter/6.0f);
+    }];
+}
 @end

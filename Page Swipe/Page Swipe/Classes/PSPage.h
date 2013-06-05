@@ -46,6 +46,9 @@ typedef enum {
 @property (assign, nonatomic) id <PSPageDelegate> delegate;
 @property (strong, nonatomic) PSPage *nextPage;
 @property (strong, nonatomic) PSPage *prevPage;
+@property (nonatomic) BOOL canBeRemoved;
+@property (nonatomic) BOOL canBeResized;
+@property (nonatomic) BOOL isHorizontalOnly;
 
 -(void)decreaseSize:(PSRecursiveDirection) recursiveDirection;
 -(void)originalSize:(PSRecursiveDirection) recursiveDirection;

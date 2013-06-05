@@ -93,6 +93,14 @@
 
 #pragma mark PSPageDelegate
 
+-(void)setAllowRemovePages:(BOOL)allowRemovePages
+{
+    _allowRemovePages = allowRemovePages;
+    for (PSPage *page in self.pagesArray) {
+        page.canBeRemoved = allowRemovePages;
+    }
+}
+
 -(void)pageWasRemoved:(PSPage *)page
 {
     [self.pagesArray removeObject:page];
