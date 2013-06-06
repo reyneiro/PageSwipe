@@ -573,14 +573,13 @@
     CGFloat distanceFromCenter = [page distanceFrom:[page centerOnSuperView] to:page.center];
     CGFloat zAngle = -1 * 0.2f * distanceFromCenter/(page.superview.frame.size.width/3.0f);
     CGFloat angle = 15.0f * distanceFromCenter/(page.superview.frame.size.width/2.5f);
-    //MAX(-1 * fmodl(distanceFromCenter, 0.2f), zAngle);
     
     [UIView animateWithDuration:.5 animations:^{
         CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
         rotationAndPerspectiveTransform.m34 = 1.0 / -500;
         rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, angle * M_PI / 180.0f, 0.0f, 1.0f, zAngle);
         page.layer.transform = rotationAndPerspectiveTransform;
-        page.center = CGPointMake(page.center.x, page.superview.center.y + distanceFromCenter/6.0f);
+        page.center = CGPointMake(page.center.x, page.superview.center.y + distanceFromCenter/4.0f);
     }];
 }
 
@@ -595,7 +594,7 @@
         rotationAndPerspectiveTransform.m34 = 1.0 / -500;
         rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, angle * M_PI / 180.0f, 0.0f, 1.0f, zAngle);
         page.layer.transform = rotationAndPerspectiveTransform;
-        page.center = CGPointMake(page.center.x, page.superview.center.y + distanceFromCenter/6.0f);
+        page.center = CGPointMake(page.center.x, page.superview.center.y + distanceFromCenter/4.0f);
     }];
 }
 @end
