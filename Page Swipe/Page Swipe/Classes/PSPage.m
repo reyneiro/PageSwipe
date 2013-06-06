@@ -393,12 +393,13 @@
  */
 -(void)originalSize:(PSRecursiveDirection) recursiveDirection
 {
-    [UIView animateWithDuration: kAnimationsSpeed
-                          delay: 0
-                        options: (UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction)
-                     animations:^{self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);}
-                     completion:^(BOOL finished) { }
-     ];
+    if (!self.isHorizontalOnly)
+    {
+        if(![[self.delegate currentPage] isEqual:self.nextPage] || ![[self.delegate currentPage] isEqual:self.prevPage])
+        return;
+    }
+    
+    [self originalSize];
     
     switch (recursiveDirection) {
         case PSRecursiveDirectionNext:
@@ -412,6 +413,16 @@
             return;
             break;
     }
+}
+
+-(void)originalSize
+{
+    [UIView animateWithDuration: kAnimationsSpeed
+                          delay: 0
+                        options: (UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction)
+                     animations:^{self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);}
+                     completion:^(BOOL finished) { }
+     ];
 }
 
 /*
@@ -447,6 +458,7 @@
 */
 -(void)centerView:(void (^)(BOOL finished)) completion
 {
+    
     CGFloat distance = [self distanceFrom:self.center to:[self centerOnSuperView]];
     CGFloat distanceNext = [self distanceFrom:self.nextPage.center to:[self centerOnSuperView]];
     CGFloat distancePrev = [self distanceFrom:self.prevPage.center to:[self centerOnSuperView]];
@@ -459,12 +471,20 @@
                 [self alignCentersFromPage:self];
                 [self.delegate setCurrentPage:self];
                 self.alpha = 1;
+                
+                if (!self.isHorizontalOnly) {
+                    [self originalSize];
+                }
             }
             else
             {
                 [self.prevPage alignCentersFromPage:self.prevPage];
                 [self.delegate setCurrentPage:self.prevPage];
                 [self setShouldRemovePage:YES];
+                
+                if (!self.isHorizontalOnly) {
+                    [self.prevPage originalSize];
+                }
             }
         }
         else if(distanceNext <= distancePrev)
@@ -472,12 +492,24 @@
             [self.nextPage alignCentersFromPage:self.nextPage];
             [self.delegate setCurrentPage:self.nextPage];
             [self setShouldRemovePage:YES];
+            
+            if (!self.isHorizontalOnly) {
+                if (!self.isHorizontalOnly) {
+                    [self.nextPage originalSize];
+                }
+            }
         }
         else
         {
             [self.prevPage alignCentersFromPage:self.prevPage];
             [self.delegate setCurrentPage:self.prevPage];
             [self setShouldRemovePage:YES];
+            
+            if (!self.isHorizontalOnly) {
+                if (!self.isHorizontalOnly) {
+                    [self.prevPage originalSize];
+                }
+            }
         }
     } completion:^(BOOL finished) {
         
